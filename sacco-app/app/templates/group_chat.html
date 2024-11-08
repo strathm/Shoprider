@@ -1,0 +1,39 @@
+<!-- templates/group_chat.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ group.name }} - Group Chat</h2>
+    <div id="chat-box" class="chat-box">
+        <!-- Messages will be displayed here -->
+    </div>
+
+    <form id="chat-form">
+        <div class="form-group">
+            <input type="text" id="message-input" class="form-control" placeholder="Type your message...">
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</div>
+
+<script>
+    // WebSocket for real-time chat
+    var ws = new WebSocket('ws://localhost:5000/group/{{ group.id }}/chat');
+    var chatBox = document.getElementById('chat-box');
+
+    ws.onmessage = function(event) {
+        var message = document.createElement('div');
+        message.classList.add('message');
+        message.textContent = event.data;
+        chatBox.appendChild(message);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    };
+
+    document.getElementById('chat-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var message = document.getElementById('message-input').value;
+        ws.send(message);
+        document.getElementById('message-input').value = '';
+    });
+</script>
+{% endblock %}

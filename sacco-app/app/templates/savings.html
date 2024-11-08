@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Your Savings</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="mb-4">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="amount">Amount to Save</label>
+            {{ form.amount(class="form-control", placeholder="Enter amount") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Add Savings</button>
+    </form>
+
+    <h3>Your Current Savings</h3>
+    {% if savings %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Transaction ID</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for saving in savings %}
+                <tr>
+                    <td>{{ saving.amount }}</td>
+                    <td>{{ saving.transaction_id }}</td>
+                    <td>{{ saving.date_created.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>{{ saving.payment_status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have no savings records yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

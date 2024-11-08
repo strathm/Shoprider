@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Membership Requests{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Membership Requests</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Member Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in membership_requests %}
+        <tr>
+            <td>{{ request.id }}</td>
+            <td>{{ request.user.name }}</td>
+            <td>{{ request.user.email }}</td>
+            <td>{{ request.status }}</td>
+            <td>
+                {% if request.status == 'pending' %}
+                    <form action="{{ url_for('admit_member', user_id=request.user.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-success">Admit</button>
+                    </form>
+                    <form action="{{ url_for('reject_membership', user_id=request.user.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+                {% else %}
+                    <span class="text-muted">N/A</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Schedule Meeting{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Schedule Meeting</h2>
+
+    <form method="POST" action="{{ url_for('schedule_meeting', group_id=group.id) }}">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="title">Meeting Title</label>
+            {{ form.title(class="form-control", id="title") }}
+        </div>
+        <div class="form-group">
+            <label for="date">Date</label>
+            {{ form.date(class="form-control", id="date", type="date") }}
+        </div>
+        <div class="form-group">
+            <label for="time">Time</label>
+            {{ form.time(class="form-control", id="time", type="time") }}
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            {{ form.description(class="form-control", id="description", rows="3") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Schedule Meeting</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning mt-3">
+                {% for message in messages %}
+                    <div>{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <a href="{{ url_for('group', group_id=group.id) }}" class="btn btn-secondary mt-3">Back to Group</a>
+</div>
+{% endblock %}

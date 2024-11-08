@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Calendar{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Calendar</h2>
+    <div id="calendar"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                events: [
+                    // Example events (replace with dynamic data)
+                    {
+                        title: 'Meeting with Group A',
+                        start: '2024-10-05T10:00:00',
+                        end: '2024-10-05T12:00:00'
+                    },
+                    {
+                        title: 'Loan Application Deadline',
+                        start: '2024-10-10',
+                    }
+                ],
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                selectable: true,
+                select: function(start, end) {
+                    // Add logic for creating a new event
+                    const title = prompt('Event Title:');
+                    if (title) {
+                        const eventData = {
+                            title: title,
+                            start: start,
+                            end: end
+                        };
+                        $('#calendar').fullCalendar('renderEvent', eventData, true);
+                    }
+                    $('#calendar').fullCalendar('unselect');
+                },
+                eventClick: function(event) {
+                    // Add logic for viewing/editing an event
+                    alert('Event: ' + event.title);
+                }
+            });
+        });
+    </script>
+{% endblock %}

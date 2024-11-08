@@ -1,0 +1,10 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Welcome to the SACCO App!</h1>
+        <p>This is the home page where you can find important information about our services.</p>
+        <a class="btn btn-primary" href="{{ url_for('dashboard') }}">Go to Dashboard</a>
+    </div>
+{% endblock %}

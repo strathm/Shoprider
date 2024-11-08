@@ -1,0 +1,59 @@
+/sacco-app
+│
+├── /app
+│   ├── /static
+│   │   ├── /css
+│   │   ├── /js
+│   │   └── /images
+│   ├── /templates
+│   │   ├── base.html
+│   │   ├── dashboard.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   │   ├── group.html
+│   │   ├── group_list.html
+│   │   ├── loan_request.html
+│   │   ├── profile.html
+│   │   └── calendar.html
+│   ├── /models.py
+│   ├── /forms.py
+│   ├── /routes.py
+│   ├── /utils.py
+│   ├── /services.py
+│   └── __init__.py
+│
+├── /migrations
+│   └── (for database migrations)
+│
+├── /tests
+│   └── (unit and functional tests)
+│
+├── /mobile
+│   ├── /lib
+│   │   ├── /screens
+│   │   │   ├── login_screen.dart
+│   │   │   ├── register_screen.dart
+│   │   │   ├── dashboard_screen.dart
+│   │   │   ├── group_screen.dart
+│   │   │   ├── group_list_screen.dart
+│   │   │   ├── loan_request_screen.dart
+│   │   │   ├── profile_screen.dart
+│   │   │   ├── calendar_screen.dart
+│   │   ├── /services
+│   │   │   ├── api_service.dart
+│   │   │   └── socket_service.dart
+│   │   ├── /models
+│   │   │   ├── user_model.dart
+│   │   │   ├── group_model.dart
+│   │   │   └── loan_model.dart
+│   │   ├── main.dart
+│   ├── /android
+│   ├── /ios
+│   ├── /assets
+│   └── pubspec.yaml
+│
+├── config.py
+├── .env
+├── requirements.txt
+├── run.py
+└── README.md
